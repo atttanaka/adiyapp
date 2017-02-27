@@ -3,7 +3,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center">
-      <h2>無料会員登録</h2>
+
+      <% if request.url.include?("admin") %>
+        <h2>管理ユーザー登録</h2>
+      <% elsif request.url.include?("user") %>
+        <h2>無料ユーザー登録</h2>
+      <% elsif request.url.include?("company") %>
+        <h2>企業ユーザー登録</h2>
+      <% end %>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
