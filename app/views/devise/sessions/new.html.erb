@@ -3,7 +3,15 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center">
-      <h2>ログイン</h2>
+
+      <% if request.url.include?("admin") %>
+        <h2>管理ユーザーログイン</h2>
+      <% elsif request.url.include?("user") %>
+        <h2>ユーザーログイン</h2>
+      <% elsif request.url.include?("compan") %>
+        <h2>企業ユーザーログイン</h2>
+      <% end %>
+
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
         <div class="form-group">

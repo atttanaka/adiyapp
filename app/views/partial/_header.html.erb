@@ -13,7 +13,17 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if (!user_signed_in?) %>
+
           <li><%= link_to "管理(debug)", adminpage_path %></li>
+          <% if admin_signed_in? %>
+            <li><%= link_to "管理者ログアウト(debug)", destroy_admin_session_path, method: :delete %></li>
+          <% end %>
+
+          <li><%= link_to "企業(debug)", companypage_path %></li>
+          <% if company_signed_in? %>
+            <li><%= link_to "企業ログアウト(debug)", destroy_company_session_path, method: :delete %></li>
+          <% end %>
+
           <li><%= link_to "ログイン",new_user_session_path %></li>
           <li><%= link_to "無料会員登録",new_user_registration_path %></li>
         <% else %>
