@@ -6,10 +6,29 @@ class AdminpagesController < ApplicationController
     @user = User.all
   end
 
+  def userspermit
+    permit_check!
+    @user = User.find_by(id: params[:params_id])
+
+    @user.toggle(:permit)
+    @user.save!
+    redirect_to userslist_adminpage_url
+  end
+
   def companieslist
     permit_check!
     @company = Company.all
   end
+
+  def companiespermit
+    permit_check!
+    @company = Company.find_by(id: params[:params_id])
+
+    @company.toggle(:permit)
+    @company.save!
+    redirect_to companieslist_adminpage_url
+  end
+
 
   def show
     permit_check!

@@ -1,4 +1,26 @@
-一般ユーザー一覧<br>
-<% @user.each do |user| %>
-  <strong><%= user.email %></strong><br>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1">
+      <br>【一般ユーザー一覧】<br><br>
+      <% @user.each do |user| %>
+        <% if user.permit? %>○<% else %>×<% end %>
+        <strong><%= user.email %></strong>
+
+        <% if user.permit? %>
+          <%= link_to "権限を取り消す", userspermit_adminpage_path(:params_id => user.id), method: :patch,
+                                        data: { confirm: "「<strong>#{user.email}</strong>」の権限を取り消しますか？",
+                                                             "commit" => "権限を取り消す",
+                                                             "cancel" => "やっぱりやめる",
+                                                             }, title: "権限削除の確認" %>
+        <% else %>
+          <%= link_to "権限を付与する", userspermit_adminpage_path(:params_id => user.id), method: :patch,
+                                        data: { confirm: "「<strong>#{user.email}</strong>」に権限を与えてよろしいですか？",
+                                                             "commit" => "権限を与える",
+                                                             "cancel" => "やっぱりやめる",
+                                                             }, title: "権限付与の確認" %>
+        <% end %>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>

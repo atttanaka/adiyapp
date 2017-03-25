@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resource :adminpage do
     collection do
       get :userslist
+      patch :userspermit
       get :companieslist
+      patch :companiespermit
     end
   end
 
