@@ -1,6 +1,16 @@
 class AdminpagesController < ApplicationController
   before_action :authenticate_admin!
 
+  def userslist
+    permit_check!
+    @user = User.all
+  end
+
+  def companieslist
+    permit_check!
+    @company = Company.all
+  end
+
   def show
     permit_check!
   end
