@@ -42,3 +42,52 @@ Company.create!(
   permit: false
   )
 
+Articlemanage.create!(
+  title: "記事タイトル１ユーザー１",
+  article_id: "1",
+  user_id: "1"
+  )
+
+Articlemanage.create!(
+  title: "記事タイトル2企業ユーザー１",
+  article_id: "2",
+  company_id: "1"
+  )
+
+Article.create!(
+  content_text: "記事1-1",
+  content_number: "1",
+  articlemanage_id: "1"
+  )
+
+Article.create!(
+  content_text: "記事1-2",
+  content_number: "2",
+  articlemanage_id: "1"
+  )
+
+Article.create!(
+  content_text: "記事1-3",
+  content_number: "3",
+  articlemanage_id: "1"
+  )
+
+Article.create!(
+  content_text: "記事2-1",
+  content_number: "1",
+  articlemanage_id: "2"
+  )
+
+Article.create!(
+  content_text: "記事2-2",
+  content_number: "2",
+  articlemanage_id: "2"
+  )
+
+Article.create!(
+  content_text: "記事2-3",
+  content_number: "3",
+  articlemanage_id: "2"
+  )
+
+

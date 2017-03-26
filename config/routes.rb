@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'articles/index'
+
+  get 'articles/new'
+
+  get 'articles/edit'
+
+  get 'articles/destroy'
+
   devise_for :companies
   devise_for :admins
   devise_for :users

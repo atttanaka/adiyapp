@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321090843) do
+ActiveRecord::Schema.define(version: 20170326052414) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -28,6 +28,30 @@ ActiveRecord::Schema.define(version: 20170321090843) do
     t.boolean  "permit",                 default: false, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "articlemanages", force: :cascade do |t|
+    t.text     "title"
+    t.integer  "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "admin_id"
+    t.integer  "company_id"
+    t.index ["admin_id"], name: "index_articlemanages_on_admin_id"
+    t.index ["company_id"], name: "index_articlemanages_on_company_id"
+    t.index ["user_id"], name: "index_articlemanages_on_user_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string   "content_image"
+    t.text     "content_text"
+    t.integer  "content_number"
+    t.integer  "articlemanage_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "imageposition",    default: false, null: false
+    t.index ["articlemanage_id"], name: "index_articles_on_articlemanage_id"
   end
 
   create_table "companies", force: :cascade do |t|
