@@ -1,0 +1,61 @@
+
+<%= form_for @articlemanage, html: { multipart: true, id: "my-dropzone"} do |f|  %>
+  <div class="col-md-6">
+    <%= f.label :タイトル %><font size="2" color="red">(必須)</font><br>
+    <%= f.text_field :title, :size=>"60" %><br>
+    <%= f.label :記事概要 %><font size="2" color="red">(必須)</font><br>
+    <%= f.text_area :thumb_text, :size=>"60x2" %><br>
+    <%= f.label :画像 %>
+    <%= f.file_field :thumb_image %><br>
+    <%= f.submit "記事を投稿する" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(function () {
+  Dropzone.autoDiscover = false;
+
+
+  // grap our upload form by its id
+  $("#my-dropzone").dropzone({
+    // restrict image size to a maximum 1MB
+    maxFilesize: 1,
+    maxFiles: 1,
+    // changed the passed param to one accepted by
+    // our rails app
+    paramName: "articlemanage[thumb_image]",
+    // show remove links on each image upload
+    addRemoveLinks: true,
+    // if the upload was successful
+    success: function(file, response){
+      // find the remove button link of the uploaded file and give it an id
+      // based of the fileID response from the server
+      $(file.previewTemplate).find('.dz-remove').attr('id', response.fileID);
+      // add the dz-success class (the green tick sign)
+      $(file.previewElement).addClass("dz-success");
+    },
+    //when the remove button is clicked
+    removedfile: function(file){
+      // grap the id of the uploaded file we set earlier
+      var id = $(file.previewTemplate).find('.dz-remove').attr('id');
+
+      // make a DELETE ajax request to delete the file
+      $.ajax({
+        type: 'DELETE',
+        url: '/articlemanages/' + id,
+        success: function(data){
+          console.log(data.message);
+        },
+                complete: function() {
+          var _ref;
+          if (file.previewElement) {
+            if ((_ref = file.previewElement) != null) {
+              _ref.parentNode.removeChild(file.previewElement);
+            }
+          }}
+      });
+    }
+  });
+});
+
+</script>
