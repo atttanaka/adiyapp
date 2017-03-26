@@ -7,36 +7,42 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create!(
+  name: "user1",
   email: "a@b.cde",
   password: "abcde",
   permit: true
   )
 
 User.create!(
+  name: "user2",
   email: "f@g.hij",
   password: "fghij",
   permit: false
   )
 
 Admin.create!(
+  name: "admin1",
   email: "a@d.min",
   password: "admin",
   permit: true
   )
 
 Admin.create!(
+  name: "admin2",
   email: "a@d.min2",
   password: "admin2",
   permit: false
   )
 
 Company.create!(
+  name: "company1",
   email: "c@o.mpany",
   password: "company",
   permit: true
   )
 
 Company.create!(
+  name: "company2",
   email: "c@o.mpany2",
   password: "company2",
   permit: false
