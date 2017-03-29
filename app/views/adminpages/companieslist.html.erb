@@ -4,7 +4,8 @@
       <br>【企業ユーザー一覧】<br><br>
       <% @company.each do |company| %>
         <% if company.permit? %>○<% else %>×<% end %>
-        <strong><%= company.email %></strong>
+        <strong><%= company.name %></strong>
+        <strong>(<%= company.email %>) ： </strong>
 
         <% if company.permit? %>
           <%= link_to "権限を取り消す", companiespermit_adminpage_path(:params_id => company.id), method: :patch,
@@ -17,7 +18,7 @@
                                         data: { confirm: "「<strong>#{company.email}</strong>」に権限を与えてよろしいですか？",
                                                              "commit" => "権限を与える",
                                                              "cancel" => "やっぱりやめる",
-                                                             }, title: "権限付与の確認" %>
+                                                             }, title: "権限付与の確認", :style=>"color:red;" %>
         <% end %>
         <br>
       <% end %>
