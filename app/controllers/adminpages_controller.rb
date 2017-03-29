@@ -28,6 +28,11 @@ class AdminpagesController < ApplicationController
   end
 
   def user_articlemanage_permit
+    @articlemanage = Articlemanage.find_by(id: params[:params_id])
+
+    @articlemanage.toggle(:permit)
+    @articlemanage.save!
+    redirect_to :back
   end
 
   def companieslist
@@ -57,7 +62,12 @@ class AdminpagesController < ApplicationController
 
   end
 
-  def user_articlemanage_permit
+  def company_articlemanage_permit
+    @articlemanage = Articlemanage.find_by(id: params[:params_id])
+
+    @articlemanage.toggle(:permit)
+    @articlemanage.save!
+    redirect_to :back
   end
 
   def show
