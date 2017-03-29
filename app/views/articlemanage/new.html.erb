@@ -1,0 +1,15 @@
+<%= form_for @articlemanage, url: postnewarticle_path, html: { multipart: true } do |f| %>
+  <% if company_signed_in? %>
+    <%= f.hidden_field :company_id, value: @company.id %>
+  <% else %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+  <% end %>
+
+    <%= f.label :タイトル %><font size="2" color="red">(必須)</font><br>
+    <%= f.text_field :title, :size=>"60" %><br>
+    <%= f.label :記事概要 %><font size="2" color="red">(必須)</font><br>
+    <%= f.text_area :thumb_text, :size=>"60x2" %><br>
+    <%= f.label :画像 %>
+  <%= f.file_field :thumb_image %>
+  <%= f.submit "記事を投稿する" %>
+<% end %>

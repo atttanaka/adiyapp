@@ -12,21 +12,18 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <% if (!user_signed_in?) %>
+        <% if (!user_signed_in? && !company_signed_in?) %>
 
           <li><%= link_to "管理(debug)", adminpage_path %></li>
           <% if admin_signed_in? %>
             <li><%= link_to "管理者ログアウト(debug)", destroy_admin_session_path, method: :delete %></li>
           <% end %>
 
-          <li><%= link_to "企業(debug)", companypage_path %></li>
-          <% if company_signed_in? %>
-            <li><%= link_to "企業ログアウト(debug)", destroy_company_session_path, method: :delete %></li>
-          <% end %>
+          <li><%= link_to "企業(debug)", new_company_session_path %></li>
 
           <li><%= link_to "ログイン",new_user_session_path %></li>
           <li><%= link_to "無料会員登録",new_user_registration_path %></li>
-        <% else %>
+        <% elsif (user_signed_in?) %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <%= current_user.name %>
@@ -34,10 +31,25 @@
             </a>
             <ul class="dropdown-menu">
 
-              <li><%= link_to "記事管理", articles_index_path %></li>
-              <li><%= link_to "新規記事作成", articles_new_path %></li>
+              <li><%= link_to "記事管理", articlemanage_path(@user.id) %></li>
+              <li><%= link_to "新規記事作成", new_articlemanage_path %></li>
               <li><%= link_to "プロフィール編集",  edit_user_registration_path %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+
+            </ul>
+          </li>
+        <% elsif (company_signed_in?) %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <%= current_company.name %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+
+              <li><%= link_to "記事管理", articlemanage_path(@company.id) %></li>
+              <li><%= link_to "新規記事作成", new_articlemanage_path %></li>
+              <li><%= link_to "プロフィール編集",  edit_company_registration_path %></li>
+              <li><%= link_to "ログアウト", destroy_company_session_path, method: :delete %></li>
 
             </ul>
           </li>

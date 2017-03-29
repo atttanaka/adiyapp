@@ -50,13 +50,13 @@ Company.create!(
 
 Articlemanage.create!(
   title: "記事タイトル１ユーザー１",
-  article_id: "1",
+  thumb_text: "記事概要1ユーザー1",
   user_id: "1"
   )
 
 Articlemanage.create!(
   title: "記事タイトル2企業ユーザー１",
-  article_id: "2",
+  thumb_text: "記事概要2企業ユーザー1",
   company_id: "1"
   )
 

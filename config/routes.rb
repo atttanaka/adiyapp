@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'articles/index'
+  resources :articlemanage
 
-  get 'articles/new'
-
-  get 'articles/edit'
-
-  get 'articles/destroy'
+  match '/postnewarticle', to: 'articlemanage#create', via: 'post'
+  resources :article
 
   devise_for :companies
   devise_for :admins
