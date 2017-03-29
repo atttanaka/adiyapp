@@ -8,18 +8,20 @@
         <strong>(<%= company.email %>) ： </strong>
 
         <% if company.permit? %>
-          <%= link_to "権限を取り消す", companiespermit_adminpage_path(:params_id => company.id), method: :patch,
+          <%= link_to "権限削除", companiespermit_adminpage_path(:params_id => company.id), method: :patch,
                                         data: { confirm: "「<strong>#{company.email}</strong>」の権限を取り消しますか？",
                                                              "commit" => "権限を取り消す",
                                                              "cancel" => "やっぱりやめる",
                                                              }, title: "権限削除の確認" %>
         <% else %>
-          <%= link_to "権限を付与する", companiespermit_adminpage_path(:params_id => company.id), method: :patch,
+          <%= link_to "権限付与", companiespermit_adminpage_path(:params_id => company.id), method: :patch,
                                         data: { confirm: "「<strong>#{company.email}</strong>」に権限を与えてよろしいですか？",
                                                              "commit" => "権限を与える",
                                                              "cancel" => "やっぱりやめる",
                                                              }, title: "権限付与の確認", :style=>"color:red;" %>
         <% end %>
+
+        <%= link_to "記事管理",company_articlemanage_list_adminpage_path(:params_id => company.id) %>
         <br>
       <% end %>
     </div>

@@ -1,4 +1,7 @@
 class Articlemanage < ApplicationRecord
+    belongs_to :user
+    belongs_to :company
+
     has_many :articles, dependent: :destroy
 
     validates :title, presence: true, length: { maximum: 255 }

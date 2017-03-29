@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329073541) do
+ActiveRecord::Schema.define(version: 20170329130727) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20170329073541) do
   create_table "articlemanages", force: :cascade do |t|
     t.text     "title"
     t.integer  "article_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "user_id"
     t.integer  "admin_id"
     t.integer  "company_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170329073541) do
     t.string   "thumb_image_content_type"
     t.integer  "thumb_image_file_size"
     t.datetime "thumb_image_updated_at"
+    t.boolean  "permit",                   default: false, null: false
     t.index ["admin_id"], name: "index_articlemanages_on_admin_id"
     t.index ["company_id"], name: "index_articlemanages_on_company_id"
     t.index ["user_id"], name: "index_articlemanages_on_user_id"

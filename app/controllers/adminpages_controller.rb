@@ -1,13 +1,12 @@
 class AdminpagesController < ApplicationController
   before_action :authenticate_admin!
+  before_action :permit_check!
 
   def userslist
-    permit_check!
     @user = User.all
   end
 
   def userspermit
-    permit_check!
     @user = User.find_by(id: params[:params_id])
 
     @user.toggle(:permit)
@@ -15,13 +14,27 @@ class AdminpagesController < ApplicationController
     redirect_to userslist_adminpage_url
   end
 
+  def user_articlemanage_list
+    @user = User.find_by(id: params[:params_id])
+    @articlemanage = @user.articlemanages
+
+    @pending_articlemanage = @articlemanage.select do |x|
+      x.permit == false
+    end
+
+    @approved_articlemanage = @articlemanage.select do |x|
+      x.permit == true
+    end
+  end
+
+  def user_articlemanage_permit
+  end
+
   def companieslist
-    permit_check!
     @company = Company.all
   end
 
   def companiespermit
-    permit_check!
     @company = Company.find_by(id: params[:params_id])
 
     @company.toggle(:permit)
@@ -30,8 +43,24 @@ class AdminpagesController < ApplicationController
   end
 
 
+  def company_articlemanage_list
+    @company = Company.find_by(id: params[:params_id])
+    @articlemanage = @company.articlemanages
+
+    @pending_articlemanage = @articlemanage.select do |x|
+      x.permit == false
+    end
+
+    @approved_articlemanage = @articlemanage.select do |x|
+      x.permit == true
+    end
+
+  end
+
+  def user_articlemanage_permit
+  end
+
   def show
-    permit_check!
   end
 
   private

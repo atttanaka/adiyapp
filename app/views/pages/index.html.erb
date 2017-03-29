@@ -14,3 +14,33 @@
     </div>
   </div>
 </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+    タイトル・画像
+    </div>
+    <div class="col-sm-9">
+    記事の概要
+    </div>
+  </div>
+
+  <% @permit_articlemanage.each_with_index do |articlemanage, i| %>
+    <div class="row bg-success">
+      <%= "#{h(i + 1)}. " %><%= articlemanage.title %><br>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+      <br>
+        <% if articlemanage.thumb_image_file_name.nil? %>
+          <%= image_tag 'DIYnavi.png' %>
+        <% else %>
+          <%= image_tag articlemanage.thumb_image.url(:thumb) %>
+        <% end %>
+        <br><br>
+      </div>
+      <div class="col-sm-9　pre-scrollable">
+        <%= articlemanage.thumb_text %><br>
+      </div>
+    </div>
+  <% end %>
+</div>

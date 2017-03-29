@@ -14,8 +14,13 @@ Rails.application.routes.draw do
     collection do
       get :userslist
       patch :userspermit
+      get :user_articlemanage_list
+      patch :user_articlemanage_permit
+
       get :companieslist
       patch :companiespermit
+      get :company_articlemanage_list
+      patch :company_articlemanage_permit
     end
   end
 

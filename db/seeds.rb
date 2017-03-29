@@ -50,8 +50,9 @@ Company.create!(
 
 Articlemanage.create!(
   title: "記事タイトル１ユーザー１",
-  thumb_text: "記事概要1ユーザー1",
-  user_id: "1"
+  thumb_text: "記事概要1ユーザー1 承認済み",
+  user_id: "1",
+  permit: true
   )
 
 Articlemanage.create!(
@@ -60,6 +61,12 @@ Articlemanage.create!(
   company_id: "1"
   )
 
+Articlemanage.create!(
+  title: "記事タイトル3ユーザー１",
+  thumb_text: "記事概要1ユーザー1 未承認",
+  user_id: "1",
+  permit: false
+  )
 Article.create!(
   content_text: "記事1-1",
   content_number: "1",

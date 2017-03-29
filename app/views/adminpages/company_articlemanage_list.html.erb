@@ -1,0 +1,56 @@
+<% if !(@pending_articlemanage.count == 0) %>
+  <div class="row bg-primary text-center">
+   承認待ち記事一覧
+  </div>
+<% end %>
+<% @pending_articlemanage.each_with_index do |articlemanage, i| %>
+  <div class="row bg-success">
+    <%= "#{h(i + 1)}. " %><%= articlemanage.title %><br>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+    <br>
+      <% if articlemanage.thumb_image_file_name.nil? %>
+        <%= image_tag 'DIYnavi.png' %>
+      <% else %>
+        <%= image_tag articlemanage.thumb_image.url(:thumb) %>
+      <% end %>
+      <br><br>
+    </div>
+    <div class="col-sm-9　pre-scrollable">
+      <%= articlemanage.thumb_text %><br>
+    </div>
+  </div>
+<% end %>
+
+<% if !(@approved_articlemanage.count == 0) %>
+  <div class="row bg-primary text-center">
+   承認済み記事一覧
+  </div>
+<% end %>
+<% @approved_articlemanage.each_with_index do |articlemanage, i| %>
+  <div class="row bg-success">
+    <%= "#{h(i + 1)}. " %><%= articlemanage.title %><br>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+    <br>
+      <% if articlemanage.thumb_image_file_name.nil? %>
+        <%= image_tag 'DIYnavi.png' %>
+      <% else %>
+        <%= image_tag articlemanage.thumb_image.url(:thumb) %>
+      <% end %>
+      <br><br>
+    </div>
+    <div class="col-sm-9　pre-scrollable">
+      <%= articlemanage.thumb_text %><br>
+    </div>
+  </div>
+<% end %>
+
+<% if (@approved_articlemanage.count == 0)&&(@pending_articlemanage.count == 0) %>
+  <div class="row bg-danger text-center">
+   記事が一件もありません
+  </div>
+<% end %>
+
