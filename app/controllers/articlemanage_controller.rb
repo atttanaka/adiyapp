@@ -15,6 +15,16 @@ class ArticlemanageController < ApplicationController
   end
 
   def show
+    if params[:user_type]
+      @user = User.find(params[:id])
+      @articlemanage = @user.articlemanages
+    elsif params[:company_type]
+      @company = Company.find(params[:id])
+      @articlemanage = @company.articlemanages
+    else
+      redirect_to root_path
+    end
+
   end
 
   def edit
