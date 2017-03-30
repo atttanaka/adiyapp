@@ -13,16 +13,22 @@
     </div>
     <div class="row">
       <% if @articlemanage.permit == false %>
-        <div class="col-md-2 text-center bg-warning">
-          <br><br>
-            <br><br>STATUS:承認待ち
-          <br><br>
+        <div class="col-md-2 bg-warning">
+            <div class="text-left">承認待ち</div>
+            <br>
+            Posted
+            <div class="text-right"><%= time_ago_in_words(@articlemanage.created_at) %> ago.</div>
+            Updated
+            <div class="text-right"><%= time_ago_in_words(@articlemanage.updated_at) %> ago.</div>
         </div>
       <% else %>
-        <div class="col-md-2 text-center bg-info">
-          <br><br>
-            <br><br>STATUS:承認済み
-          <br><br>
+        <div class="col-md-2 bg-info">
+            <div class="text-left">承認済み</div>
+            <br>
+            Posted
+            <div class="text-right"><%= time_ago_in_words(@articlemanage.created_at) %> ago.</div>
+            Updated
+            <div class="text-right"><%= time_ago_in_words(@articlemanage.updated_at) %> ago.</div>
         </div>
       <% end %>
 
@@ -48,7 +54,16 @@
       <%= f.text_area :thumb_text, :size=>"60x2" %><br>
       <%= f.label :画像の変更 %>
     <%= f.file_field :thumb_image %>
-    <%= f.submit "編集を適用する" %>
+
+    <% if @articlemanage.permit == true %>
+      <%= f.submit "編集を適用する", data: { confirm: "編集を加えると記事の承認が解除されます。よろしいですか？",
+                                                             "commit" => "編集する",
+                                                             "cancel" => "やっぱりやめる",
+                                                             }, title: "承認解除の確認" %>
+    <% else %>
+      <%= f.submit "編集を適用する" %>
+    <% end %>
+
   <% end %>
 </div>
 

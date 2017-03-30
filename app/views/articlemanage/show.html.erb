@@ -15,18 +15,22 @@
     </div>
     <div class="row">
       <% if articlemanage.permit == false %>
-        <div class="col-md-2 text-center bg-warning">
-          <br><br>
-            <%= link_to "記事編集" , edit_articlemanage_path(articlemanage.id) %>
-            <br><br>STATUS:承認待ち
-          <br><br>
+        <div class="col-md-2 bg-warning">
+            <div class="text-left">承認待ち</div>
+            <div class="text-center"><%= link_to "記事編集" , edit_articlemanage_path(articlemanage.id) %></div>
+            Posted
+            <div class="text-right"><%= time_ago_in_words(articlemanage.created_at) %> ago.</div>
+            Updated
+            <div class="text-right"><%= time_ago_in_words(articlemanage.updated_at) %> ago.</div>
         </div>
       <% else %>
-        <div class="col-md-2 text-center bg-info">
-          <br><br>
-            <%= link_to "記事編集" , edit_articlemanage_path(articlemanage.id) %>
-            <br><br>STATUS:承認済み
-          <br><br>
+        <div class="col-md-2 bg-info">
+            <div class="text-left">承認済み</div>
+            <div class="text-center"><%= link_to "記事編集" , edit_articlemanage_path(articlemanage.id) %></div>
+            Posted
+            <div class="text-right"><%= time_ago_in_words(articlemanage.created_at) %> ago.</div>
+            Updated
+            <div class="text-right"><%= time_ago_in_words(articlemanage.updated_at) %> ago.</div>
         </div>
       <% end %>
 
