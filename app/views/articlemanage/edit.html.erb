@@ -1,58 +1,62 @@
  <div class="container">
-  <div class="row">
-    <div class="col-sm-3">
-    タイトル・画像
+  <div class="row bg-primary">
+    &nbsp;見出し記事の編集</div>
+  <div class="row bg-danger">
+    <div class="col-sm-2">
+      ステータス
     </div>
-    <div class="col-sm-9">
-    記事の概要
+    <div class="col-sm-2">
+      画像
+    </div>
+    <div class="col-sm-8">
+      記事の概要
     </div>
   </div>
 
-    <div class="row bg-success">
-      <%= @articlemanage.title %><br>
-    </div>
-    <div class="row">
-      <% if @articlemanage.permit == false %>
-        <div class="col-md-2 bg-warning">
-            <div class="text-left">承認待ち</div>
-            <br>
-            Posted
-            <div class="text-right"><%= time_ago_in_words(@articlemanage.created_at) %> ago.</div>
-            Updated
-            <div class="text-right"><%= time_ago_in_words(@articlemanage.updated_at) %> ago.</div>
-        </div>
+  <div class="row bg-success">
+    <%= @articlemanage.title %><br>
+  </div>
+  <div class="row">
+    <% if @articlemanage.permit == false %>
+      <div class="col-sm-2 bg-warning">
+        <div class="text-left">承認待ち</div>
+          Posted
+        <div class="text-right"><%= time_ago_in_words(@articlemanage.created_at) %> ago.</div>
+          Updated
+        <div class="text-right"><%= time_ago_in_words(@articlemanage.updated_at) %> ago.</div>
+      </div>
+    <% else %>
+      <div class="col-sm-2 bg-info">
+        <div class="text-left">承認済み</div>
+          <br>
+          Posted
+        <div class="text-right"><%= time_ago_in_words(@articlemanage.created_at) %> ago.</div>
+          Updated
+        <div class="text-right"><%= time_ago_in_words(@articlemanage.updated_at) %> ago.</div>
+      </div>
+    <% end %>
+
+    <div class="col-sm-2">
+    <br>
+      <% if @articlemanage.thumb_image_file_name.nil? %>
+        <%= image_tag 'DIYnavi.png' %>
       <% else %>
-        <div class="col-md-2 bg-info">
-            <div class="text-left">承認済み</div>
-            <br>
-            Posted
-            <div class="text-right"><%= time_ago_in_words(@articlemanage.created_at) %> ago.</div>
-            Updated
-            <div class="text-right"><%= time_ago_in_words(@articlemanage.updated_at) %> ago.</div>
-        </div>
+        <%= image_tag @articlemanage.thumb_image.url(:thumb) %>
       <% end %>
-
-      <div class="col-sm-3">
-      <br>
-        <% if @articlemanage.thumb_image_file_name.nil? %>
-          <%= image_tag 'DIYnavi.png' %>
-        <% else %>
-          <%= image_tag @articlemanage.thumb_image.url(:thumb) %>
-        <% end %>
-        <br><br>
-      </div>
-      <div class="col-sm-7　pre-scrollable">
-        <%= @articlemanage.thumb_text %><br>
-      </div>
+      <br><br>
     </div>
+    <div class="col-sm-8 pre-scrollable">
+      <%= @articlemanage.thumb_text %><br>
+    </div>
+  </div>
 
-    <%= form_for @articlemanage, html: { multipart: true } do |f| %>
-      <%= f.hidden_field :id, value: @articlemanage.id %>
-      <%= f.label :タイトル %><font size="2" color="red">(必須)</font><br>
-      <%= f.text_field :title, :size=>"60" %><br>
-      <%= f.label :記事概要 %><font size="2" color="red">(必須)</font><br>
-      <%= f.text_area :thumb_text, :size=>"60x2" %><br>
-      <%= f.label :画像の変更 %>
+  <%= form_for @articlemanage, html: { multipart: true } do |f| %>
+    <%= f.hidden_field :id, value: @articlemanage.id %>
+    <%= f.label :タイトル %><font size="2" color="red">(必須)</font><br>
+    <%= f.text_field :title, :size=>"60" %><br>
+    <%= f.label :記事概要 %><font size="2" color="red">(必須)</font><br>
+    <%= f.text_area :thumb_text, :size=>"60x2" %><br>
+    <%= f.label :画像の変更 %>
     <%= f.file_field :thumb_image %>
 
     <% if @articlemanage.permit == true %>
@@ -63,7 +67,40 @@
     <% else %>
       <%= f.submit "編集を適用する" %>
     <% end %>
-
   <% end %>
-</div>
+  <br>
+  <div class="row bg-info">&nbsp;記事一覧( <%= link_to "編集する", edit_article_path(@articlemanage.id) %> )</div>
+    <% @article.each_with_index do |article,i| %>
 
+      <div class="row bg-success">
+        記事項目<%= "#{h(i + 1)}" %><br>
+      </div>
+      <div class="row">
+        <!-- 画像が無い記事はテキストのみ表示 -->
+        <% if article.article_image_file_name.nil? %>
+          <div class="col-sm-12">
+            <%= article.content_text %>
+          </div>
+        <% else %>
+          <!-- 画像が有る記事は画像位置を調べる。現在はfalse左配置、true右配置 -->
+          <% if article.imageposition == false %>
+            <div class="col-sm-2">
+              <%= image_tag article.article_image.url(:thumb) %>
+            </div>
+            <div class="col-sm-10">
+              <%= article.content_text %>
+            </div>
+          <% else %>
+            <div class="col-sm-10">
+              <%= article.content_text %>
+            </div>
+            <div class="col-sm-2">
+              <%= image_tag article.article_image.url(:thumb) %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <br>
+    <% end %>
+  </div>
+</div>

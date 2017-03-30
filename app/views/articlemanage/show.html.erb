@@ -1,11 +1,13 @@
 <div class="container">
-  承認済みの記事も、編集すると承認待ち状態になりますので注意してください<br><br>
   <div class="row">
-    <div class="col-sm-3">
-    タイトル・画像
+    <div class="col-sm-2">
+      ステータス
     </div>
-    <div class="col-sm-9">
-    記事の概要
+    <div class="col-sm-2">
+      画像
+    </div>
+    <div class="col-sm-8">
+      記事の概要
     </div>
   </div>
 
@@ -15,7 +17,7 @@
     </div>
     <div class="row">
       <% if articlemanage.permit == false %>
-        <div class="col-md-2 bg-warning">
+        <div class="col-sm-2 bg-warning">
             <div class="text-left">承認待ち</div>
             <div class="text-center"><%= link_to "記事編集" , edit_articlemanage_path(articlemanage.id) %></div>
             Posted
@@ -24,7 +26,7 @@
             <div class="text-right"><%= time_ago_in_words(articlemanage.updated_at) %> ago.</div>
         </div>
       <% else %>
-        <div class="col-md-2 bg-info">
+        <div class="col-sm-2 bg-info">
             <div class="text-left">承認済み</div>
             <div class="text-center"><%= link_to "記事編集" , edit_articlemanage_path(articlemanage.id) %></div>
             Posted
@@ -34,7 +36,7 @@
         </div>
       <% end %>
 
-      <div class="col-sm-3">
+      <div class="col-sm-2">
       <br>
         <% if articlemanage.thumb_image_file_name.nil? %>
           <%= image_tag 'DIYnavi.png' %>
@@ -43,7 +45,7 @@
         <% end %>
         <br><br>
       </div>
-      <div class="col-sm-7　pre-scrollable">
+      <div class="col-sm-8　pre-scrollable">
         <%= articlemanage.thumb_text %><br>
       </div>
     </div>

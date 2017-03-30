@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
 
   resources :articlemanage
-
   match '/postnewarticle', to: 'articlemanage#create', via: 'post'
-  resources :article
+
+  resources :article do
+    collection do
+      patch :up
+      patch :down
+    end
+  end
+  match '/newarticle', to: 'article#create', via: 'post'
+
 
   devise_for :companies
   devise_for :admins

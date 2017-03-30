@@ -10,8 +10,11 @@ class ArticlemanageController < ApplicationController
 
   def create
     @articlemanage = Articlemanage.new( articlemanage_params )
-    @articlemanage.save
-    redirect_to root_path
+    if @articlemanage.save
+      redirect_to edit_article_path(@articlemanage.id)
+    else
+      redirect_to :back, alert: "記事の作成に失敗しました"
+    end
   end
 
   def show
@@ -30,6 +33,8 @@ class ArticlemanageController < ApplicationController
     @company = current_company
     @user = current_user
     @articlemanage = Articlemanage.find(params[:id])
+
+    @article = @articlemanage.articles.order("content_number ASC")
   end
 
   def update
@@ -37,7 +42,9 @@ class ArticlemanageController < ApplicationController
     if @articlemanage.update(articlemanage_params)
         @articlemanage.permit = false
         @articlemanage.save!
-      redirect_to :back, notice: "更新の更新が完了しました。"
+      redirect_to :back, notice: "記事の更新が完了しました。"
+    else
+      redirect_to :back, alert: "記事の更新に失敗しました。"
     end
   end
 

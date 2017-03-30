@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329130727) do
+ActiveRecord::Schema.define(version: 20170330145808) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -56,9 +56,13 @@ ActiveRecord::Schema.define(version: 20170329130727) do
     t.text     "content_text"
     t.integer  "content_number"
     t.integer  "articlemanage_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "imageposition",    default: false, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.boolean  "imageposition",              default: false, null: false
+    t.string   "article_image_file_name"
+    t.string   "article_image_content_type"
+    t.integer  "article_image_file_size"
+    t.datetime "article_image_updated_at"
     t.index ["articlemanage_id"], name: "index_articles_on_articlemanage_id"
   end
 
