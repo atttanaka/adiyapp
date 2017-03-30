@@ -1,4 +1,5 @@
 <div class="container">
+  承認済みの記事も、編集すると承認待ち状態になりますので注意してください<br><br>
   <div class="row">
     <div class="col-sm-3">
     タイトル・画像
@@ -13,6 +14,22 @@
       <%= "#{h(i + 1)}. " %><%= articlemanage.title %><br>
     </div>
     <div class="row">
+      <% if articlemanage.permit == false %>
+        <div class="col-md-2 text-center bg-warning">
+          <br><br>
+            <%= link_to "記事編集" , edit_articlemanage_path(articlemanage.id) %>
+            <br><br>STATUS:承認待ち
+          <br><br>
+        </div>
+      <% else %>
+        <div class="col-md-2 text-center bg-info">
+          <br><br>
+            <%= link_to "記事編集" , edit_articlemanage_path(articlemanage.id) %>
+            <br><br>STATUS:承認済み
+          <br><br>
+        </div>
+      <% end %>
+
       <div class="col-sm-3">
       <br>
         <% if articlemanage.thumb_image_file_name.nil? %>
@@ -22,7 +39,7 @@
         <% end %>
         <br><br>
       </div>
-      <div class="col-sm-9　pre-scrollable">
+      <div class="col-sm-7　pre-scrollable">
         <%= articlemanage.thumb_text %><br>
       </div>
     </div>

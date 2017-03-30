@@ -8,7 +8,7 @@
     <%= "#{h(i + 1)}. " %><%= articlemanage.title %><br>
   </div>
   <div class="row">
-  <div class="col-md-2 text-center bg-danger">
+  <div class="col-md-2 text-center bg-info">
   <br><br>
     <%= link_to "承認" , company_articlemanage_permit_adminpage_path(:params_id => articlemanage.id), method: :patch %>
   <br><br><br><br>

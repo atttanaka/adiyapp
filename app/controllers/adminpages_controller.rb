@@ -10,8 +10,15 @@ class AdminpagesController < ApplicationController
     @user = User.find_by(id: params[:params_id])
 
     @user.toggle(:permit)
-    @user.save!
-    redirect_to userslist_adminpage_url
+    if @user.save
+      if @user.permit == true
+        redirect_to userslist_adminpage_url, notice: @user.name + "に権限を付与しました。"
+      else
+        redirect_to userslist_adminpage_url, notice: @user.name + "の権限を剥奪しました。"
+      end
+    else
+      redirect_to userslist_adminpage_url, alert: "権限の変更に失敗しました。"
+    end
   end
 
   def user_articlemanage_list
@@ -68,6 +75,9 @@ class AdminpagesController < ApplicationController
     @articlemanage.toggle(:permit)
     @articlemanage.save!
     redirect_to :back
+  end
+
+  def edit
   end
 
   def show

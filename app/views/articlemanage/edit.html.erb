@@ -1,2 +1,54 @@
-<h1>Articlemanage#edit</h1>
-<p>Find me in app/views/articlemanage/edit.html.erb</p>
+ <div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+    タイトル・画像
+    </div>
+    <div class="col-sm-9">
+    記事の概要
+    </div>
+  </div>
+
+    <div class="row bg-success">
+      <%= @articlemanage.title %><br>
+    </div>
+    <div class="row">
+      <% if @articlemanage.permit == false %>
+        <div class="col-md-2 text-center bg-warning">
+          <br><br>
+            <br><br>STATUS:承認待ち
+          <br><br>
+        </div>
+      <% else %>
+        <div class="col-md-2 text-center bg-info">
+          <br><br>
+            <br><br>STATUS:承認済み
+          <br><br>
+        </div>
+      <% end %>
+
+      <div class="col-sm-3">
+      <br>
+        <% if @articlemanage.thumb_image_file_name.nil? %>
+          <%= image_tag 'DIYnavi.png' %>
+        <% else %>
+          <%= image_tag @articlemanage.thumb_image.url(:thumb) %>
+        <% end %>
+        <br><br>
+      </div>
+      <div class="col-sm-7　pre-scrollable">
+        <%= @articlemanage.thumb_text %><br>
+      </div>
+    </div>
+
+    <%= form_for @articlemanage, html: { multipart: true } do |f| %>
+      <%= f.hidden_field :id, value: @articlemanage.id %>
+      <%= f.label :タイトル %><font size="2" color="red">(必須)</font><br>
+      <%= f.text_field :title, :size=>"60" %><br>
+      <%= f.label :記事概要 %><font size="2" color="red">(必須)</font><br>
+      <%= f.text_area :thumb_text, :size=>"60x2" %><br>
+      <%= f.label :画像の変更 %>
+    <%= f.file_field :thumb_image %>
+    <%= f.submit "編集を適用する" %>
+  <% end %>
+</div>
+

@@ -15,19 +15,30 @@ class ArticlemanageController < ApplicationController
   end
 
   def show
-    if params[:user_type]
-      @user = User.find(params[:id])
+    if user_signed_in?
+      @user = current_user
       @articlemanage = @user.articlemanages
-    elsif params[:company_type]
-      @company = Company.find(params[:id])
+    elsif company_signed_in?
+      @company = current_company
       @articlemanage = @company.articlemanages
     else
       redirect_to root_path
     end
-
   end
 
   def edit
+    @company = current_company
+    @user = current_user
+    @articlemanage = Articlemanage.find(params[:id])
+  end
+
+  def update
+    @articlemanage = Articlemanage.find(params[:id])
+    if @articlemanage.update(articlemanage_params)
+        @articlemanage.permit = false
+        @articlemanage.save!
+      redirect_to :back, notice: "更新の更新が完了しました。"
+    end
   end
 
   def destroy

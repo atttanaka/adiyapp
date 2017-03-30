@@ -31,7 +31,7 @@
             </a>
             <ul class="dropdown-menu">
 
-              <li><%= link_to "記事管理", articlemanage_path(@user.id,:user_type => 1) %></li>
+              <li><%= link_to "記事管理", articlemanage_path(@user.id, :user_type => 1) %></li>
               <li><%= link_to "新規記事作成", new_articlemanage_path %></li>
               <li><%= link_to "プロフィール編集",  edit_user_registration_path %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
@@ -46,7 +46,7 @@
             </a>
             <ul class="dropdown-menu">
 
-              <li><%= link_to "記事管理", articlemanage_path(@company.id) %></li>
+              <li><%= link_to "記事管理", articlemanage_path(@company.id, :user_type => 2) %></li>
               <li><%= link_to "新規記事作成", new_articlemanage_path %></li>
               <li><%= link_to "プロフィール編集",  edit_company_registration_path %></li>
               <li><%= link_to "ログアウト", destroy_company_session_path, method: :delete %></li>
