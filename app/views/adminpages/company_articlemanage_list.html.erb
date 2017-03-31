@@ -9,9 +9,11 @@
   </div>
   <div class="row">
   <div class="col-md-2 text-center bg-info">
-  <br><br>
+  <br>
     <%= link_to "承認" , company_articlemanage_permit_adminpage_path(:params_id => articlemanage.id), method: :patch %>
-  <br><br><br><br>
+  <br><br>
+  <%= link_to "記事内容の確認", articlemanage_index_path(:articlemanage_id => articlemanage.id) %><br>
+  <br><br>
   </div>
     <div class="col-sm-3">
     <br>
@@ -39,9 +41,11 @@
   </div>
   <div class="row">
   <div class="col-md-2 text-center bg-danger">
-  <br><br>
+  <br>
     <%= link_to "承認解除" , company_articlemanage_permit_adminpage_path(:params_id => articlemanage.id), method: :patch %>
-    <br><br><br><br>
+  <br><br>
+  <%= link_to "記事内容の確認", articlemanage_index_path(:articlemanage_id => articlemanage.id) %><br>
+  <br><br>
   </div>
     <div class="col-sm-3">
     <br>

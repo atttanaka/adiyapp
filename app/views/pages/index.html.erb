@@ -32,9 +32,9 @@
       <div class="col-sm-3">
       <br>
         <% if articlemanage.thumb_image_file_name.nil? %>
-          <%= image_tag 'DIYnavi.png' %>
+          <%= link_to image_tag('DIYnavi.png', { :border => '0', :alt => 'この記事を読む'}), articlemanage_index_path(:articlemanage_id => articlemanage.id) %>
         <% else %>
-          <%= image_tag articlemanage.thumb_image.url(:thumb) %>
+          <%= link_to image_tag(articlemanage.thumb_image.url(:thumb), { :border => '0', :alt => 'この記事を読む'}), articlemanage_index_path(:articlemanage_id => articlemanage.id) %>
         <% end %>
         <br><br>
       </div>

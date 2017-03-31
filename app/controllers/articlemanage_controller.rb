@@ -1,5 +1,14 @@
 class ArticlemanageController < ApplicationController
   def index
+    @articlemanage = Articlemanage.find_by(id: params[:articlemanage_id])
+    @article = @articlemanage.articles.order("content_number ASC")
+    if @articlemanage.user_id
+      @writter = @articlemanage.user
+    elsif @articlemanage.company_id
+      @writter = @articlemanage.company
+    else
+      redirect_to root_path
+    end
   end
 
   def new
