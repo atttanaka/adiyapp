@@ -2,6 +2,7 @@
     <div class="row">
       この記事は<%= @writter.name %>さんが<%= @articlemanage.created_at.strftime('%Y年%m月%d日 %H:%M') %>に投稿しました。
     </div>
+    <hr>
     <% @article.each_with_index do |article,i| %>
       <div class="row">
         <!-- 画像が無い記事はテキストのみ表示 -->
@@ -28,7 +29,7 @@
           <% end %>
         <% end %>
       </div>
-      <br>
+      <hr>
     <% end %>
 </div>
 
