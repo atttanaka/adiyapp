@@ -1,3 +1,8 @@
+<% if (@articlemanage.count == 0) %>
+  <div class="row bg-danger text-center">
+   記事が一件もありません
+  </div>
+<% else %>
 <div class="container">
   <div class="row">
     <div class="col-sm-2">
@@ -10,6 +15,7 @@
       記事の概要
     </div>
   </div>
+<% end %>
 
   <% @articlemanage.each_with_index do |articlemanage, i| %>
     <div class="row bg-success">

@@ -66,13 +66,9 @@ class ArticleController < ApplicationController
   def destroy
     @article = Article.find(params[:article_id])
     @content_number = @article.content_number
+    @articles = Article.where(articlemanage_id: @article.articlemanage_id)
     if @article.destroy
-      @articles = Article.all
-      @articles_new = @articles.select do |x|
-        x.articlemanage_id == @article.articlemanage_id
-      end
-      # find_by(articlemanage_id: @article.articlemanage_id)
-      @articles_new.each do |articles|
+      @articles.each do |articles|
         if articles.content_number > @content_number
           articles.content_number = articles.content_number - 1
           articles.save
