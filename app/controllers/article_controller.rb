@@ -82,6 +82,6 @@ class ArticleController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:content_text,:article_image,:imageposition,:articlemanage_id)
+      params.require(:article).permit(:content_text,:article_image,:imageposition,:articlemanage_id,:rule)
     end
 end

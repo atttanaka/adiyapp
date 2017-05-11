@@ -38,7 +38,7 @@
         <%= f.text_area :content_text, :size=>"60x2" %><br>
         <%= f.label :画像の変更 %>&nbsp;&nbsp;&nbsp;&nbsp;<%= f.check_box :imageposition, { class:"custom-checkbox" } %>チェックボックスをONにすると画像を右寄せにします
         <%= f.file_field :article_image %>
-
+        <%= f.check_box :rule, { class:"custom-checkbox" } %>チェックボックスをOFFにすると罫線を表示しません。<br>
         <% if @articlemanage.permit == true %>
           <%= f.submit "編集を適用する", data: { confirm: "編集を加えると記事の承認が解除されます。よろしいですか？",
                                                                  "commit" => "編集する",
@@ -58,7 +58,7 @@
         <%= f.text_area :content_text, :size=>"60x2" %><br>
         <%= f.label :画像の変更 %>&nbsp;&nbsp;&nbsp;&nbsp;<%= f.check_box :imageposition, { class:"custom-checkbox" } %>チェックボックスをONにすると画像を右寄せにします
         <%= f.file_field :article_image %>
-
+        <%= f.check_box :rule, { class:"custom-checkbox" } %>チェックボックスをOFFにすると罫線を表示しません。<br>
         <% if @articlemanage.permit == true %>
           <%= f.submit "記事を追加する", data: { confirm: "編集を加えると記事の承認が解除されます。よろしいですか？",
                                                                  "commit" => "編集する",
@@ -69,5 +69,39 @@
         <% end %>
       <% end %>
 </div>
+</div>
+<br>
+プレビュー
+ <div class="container">
+    <% @article.each_with_index do |article,i| %>
+      <div class="row">
+        <!-- 画像が無い記事はテキストのみ表示 -->
+        <% if article.article_image_file_name.nil? %>
+          <div class="col-sm-12">
+            <%= article.content_text %>
+          </div>
+        <% else %>
+          <!-- 画像が有る記事は画像位置を調べる。現在はfalse左配置、true右配置 -->
+          <% if article.imageposition == false %>
+            <div class="col-sm-2">
+              <%= image_tag article.article_image.url(:thumb) %>
+            </div>
+            <div class="col-sm-10">
+              <%= article.content_text %>
+            </div>
+          <% else %>
+            <div class="col-sm-10">
+              <%= article.content_text %>
+            </div>
+            <div class="col-sm-2">
+              <%= image_tag article.article_image.url(:thumb) %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <% if article.rule %>
+        <hr>
+      <% end %>
+    <% end %>
 </div>
 
