@@ -1,6 +1,9 @@
  <div class="container">
   <div class="row bg-primary">
-    &nbsp;見出し記事の編集</div>
+    &nbsp;見出し記事の編集&nbsp;<%= link_to "この記事を全て削除する", articlemanage_path(@articlemanage.id),method: :delete ,:style=>"color:red;", data: { confirm: "見出しを含めた記事の全てが削除されます。よろしいですか？",
+                                                                 "commit" => "削除する",
+                                                                 "cancel" => "やっぱりやめる",
+                                                                 }, title: "記事全削除の確認" %> </div>
   <div class="row bg-danger">
     <div class="col-sm-2">
       ステータス

@@ -64,6 +64,24 @@ class ArticleController < ApplicationController
   end
 
   def destroy
+    @article = Article.find(params[:article_id])
+    @content_number = @article.content_number
+    if @article.destroy
+      @articles = Article.all
+      @articles_new = @articles.select do |x|
+        x.articlemanage_id == @article.articlemanage_id
+      end
+      # find_by(articlemanage_id: @article.articlemanage_id)
+      @articles_new.each do |articles|
+        if articles.content_number > @content_number
+          articles.content_number = articles.content_number - 1
+          articles.save
+        end
+      end
+      redirect_to :back, notice: "記事を削除しました。"
+    else
+      redirect_to :back, alert: "記事の削除に失敗しました。"
+    end
   end
 
   private

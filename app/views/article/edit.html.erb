@@ -1,7 +1,10 @@
  <div class="container">
     <% @article.each_with_index do |article,i| %>
       <div class="row bg-success">
-        &nbsp;記事項目<%= "#{h(i + 1)}" %><%= link_to "▲", up_article_index_path(:article_id => article.id), method: :patch %><%= link_to "▼", down_article_index_path(:article_id => article.id), method: :patch %><br>
+        &nbsp;記事項目<%= "#{h(i + 1)}" %><%= link_to "▲", up_article_index_path(:article_id => article.id), method: :patch %><%= link_to "▼", down_article_index_path(:article_id => article.id), method: :patch %><%= link_to "×" ,article_path(:article_id => article.id), method: :delete, data: { confirm: "本当に削除してよろしいですか？",
+                                                                 "commit" => "削除する",
+                                                                 "cancel" => "やっぱりやめる",
+                                                                 }, title: "記事削除の確認" %><br>
       </div>
       <div class="row">
         <!-- 画像が無い記事はテキストのみ表示 -->
@@ -57,12 +60,12 @@
         <%= f.file_field :article_image %>
 
         <% if @articlemanage.permit == true %>
-          <%= f.submit "編集を適用する", data: { confirm: "編集を加えると記事の承認が解除されます。よろしいですか？",
+          <%= f.submit "記事を追加する", data: { confirm: "編集を加えると記事の承認が解除されます。よろしいですか？",
                                                                  "commit" => "編集する",
                                                                  "cancel" => "やっぱりやめる",
                                                                  }, title: "承認解除の確認" %>
         <% else %>
-          <%= f.submit "編集を適用する" %>
+          <%= f.submit "記事を追加する" %>
         <% end %>
       <% end %>
 </div>

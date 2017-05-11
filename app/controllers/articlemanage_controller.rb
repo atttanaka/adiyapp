@@ -1,5 +1,11 @@
 class ArticlemanageController < ApplicationController
   def index
+    if user_signed_in?
+      @user = current_user
+    elsif company_signed_in?
+      @company = current_company
+    end
+
     @articlemanage = Articlemanage.find_by(id: params[:articlemanage_id])
     @article = @articlemanage.articles.order("content_number ASC")
     if @articlemanage.user_id
@@ -58,6 +64,12 @@ class ArticlemanageController < ApplicationController
   end
 
   def destroy
+    @articlemanage = Articlemanage.find(params[:id])
+    if @articlemanage.destroy
+      redirect_to :root, notice: "記事を削除しました。"
+    else
+      redirect_to :root, alert: "記事の削除に失敗しました。"
+    end
   end
 
   private
